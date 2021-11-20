@@ -1,21 +1,35 @@
-import { useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-type FormValues = {
-  username: string;
-  password: string;
-};
-const LoginComponent = () => {
-  //   const [errMessage, setErrorMessage] = useState("");
-
+import * as types from "../../types/Types";
+import useLogin from "../../hooks/useLogin";
+import { useStore } from "../../store";
+import { useRouter } from "next/router";
+const LoginComponent: FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: FormValues) => {
-    console.log(data.password, data.username);
+  const { token } = useStore();
+  useEffect(() => {
+    if (token !== "") {
+      router.push("/map");
+    }
+  });
+  const { login, logout, error } = useLogin();
+  const router = useRouter();
+  const onSubmit = (data: types.LoginForm) => {
+    login(data);
+    // console.log(token);
+    if (error) {
+      login(data);
+    } else if (token !== "") {
+      router.push("/map");
+    }
+
+    // if(isLoggedIn)
   };
 
   return (
@@ -61,7 +75,7 @@ const LoginComponent = () => {
             </div>
           )}
         </div>
-        <div>
+        <div className="flex flex-col">
           <button
             className={`bg-primary text-primary-content p-4 px-8 hover:bg-primary-focus rounded-box`}
             type="submit"
@@ -70,6 +84,11 @@ const LoginComponent = () => {
           >
             Login
           </button>
+          {error && (
+            <div className="mb-3 text-normal text-error">
+              username or password is incorrect
+            </div>
+          )}
         </div>
       </div>
     </div>
