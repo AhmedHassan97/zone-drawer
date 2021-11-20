@@ -47,7 +47,6 @@ const Modal = (props: any) => {
                 <div className="p-2 text-2xl py-4">{props.title}</div>
                 <div className="divider m-0 px-2 text-gray-500"></div>
               </Dialog.Title>
-
               {props.children}
             </div>
           </Transition.Child>

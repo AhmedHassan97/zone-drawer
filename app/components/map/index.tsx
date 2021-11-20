@@ -50,6 +50,7 @@ const MapComponent = () => {
         color: event.target.value,
         label: "",
       };
+      setColor(event.target.value);
       setCurrentZone(zoneInstance);
     }
   };
@@ -120,12 +121,17 @@ const MapComponent = () => {
     };
 
     editZone(zoneToBeEditedOrDeleted._id, token, editedZone);
+    closeEditModal();
   };
 
   return (
-    <div>
-      <button onClick={() => getZones(token)}>test</button>
-      <button onClick={() => logout()}>logout</button>
+    <div className="max-h-screen">
+      <button
+        className="flex ml-auto px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+        onClick={() => logout()}
+      >
+        logout
+      </button>
       <div>
         <Toaster />
       </div>{" "}
@@ -135,6 +141,7 @@ const MapComponent = () => {
         closeAddModal={closeAddModal}
         colorHandler={colorHandler}
         onSubmitAddModal={onSubmitAddModal}
+        color={color}
       />
       <DeleteModal
         isDeleteModalOpen={isDeleteModalOpen}
@@ -161,6 +168,7 @@ const MapComponent = () => {
         setShowInfoWindow={setShowInfoWindow}
         showInfoWindow={showInfoWindow}
         openEditModal={openEditModal}
+        color={color}
       />
     </div>
   );

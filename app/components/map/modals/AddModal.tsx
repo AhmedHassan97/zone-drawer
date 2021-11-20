@@ -37,6 +37,7 @@ const AddModal = (props: any) => {
           <label className="space-x-8">Region Color</label>
           <input
             type="color"
+            value={props.color}
             className="border-2 ml-auto w-3/4 px-4 border-gray-400 rounded-box"
             {...register("color", {
               required: true,

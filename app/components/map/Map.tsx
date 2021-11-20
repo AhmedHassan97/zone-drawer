@@ -4,10 +4,9 @@ import {
   Marker,
   Polyline,
   Polygon,
-  InfoBox,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import PolygonOptions from "../../constants/PolygonOptions";
 import PolyLineOptions from "../../constants/PolyLineOptions";
 import * as types from "../../types/Types";
@@ -15,11 +14,10 @@ import * as utils from "../../utils/myUtils";
 import toast, { Toaster } from "react-hot-toast";
 import { useStore } from "../../store";
 import { getCenter } from "../../utils/myUtils";
-import useApi from "../../hooks/useApi";
 
 const containerStyle = {
   width: "100vw",
-  height: "100vh",
+  height: "95vh",
 };
 
 const center = {
@@ -28,11 +26,7 @@ const center = {
 };
 
 const Map = (props: any) => {
-  const { zones, token } = useStore();
-  null;
-
-  const [zoneId, setZoneId] = useState<String>("");
-  const [zone, setZone] = useState<types.ExportedZone>();
+  const { zones } = useStore();
 
   const markerHandler = (sentMarker: Object, index: Number) => {
     if (index !== 0) {
@@ -43,7 +37,7 @@ const Map = (props: any) => {
     } else if (index === 0 && props.markers.length > 2) {
       const zoneInstance = {
         points: props.markers,
-        color: "#000000",
+        color: props.color,
         label: "",
       };
       if (zones) {
@@ -68,7 +62,7 @@ const Map = (props: any) => {
     props.setMarkers((markers: []) => {
       return [...markers, newLocation];
     });
-    console.log(newLocation);
+    props.setShowInfoWindow(null);
   }, []);
 
   const onZoneRightClick = (data: any, zone: types.ExportedZone) => {
@@ -133,9 +127,14 @@ const Map = (props: any) => {
             );
           })}
           {props.showInfoWindow && (
-            <InfoWindow options={options} position={props.showInfoWindow}>
-              <div className="flex flex-col">
+            <InfoWindow
+              onCloseClick={() => props.setShowInfoWindow(null)}
+              options={options}
+              position={props.showInfoWindow}
+            >
+              <div className="flex flex-col space-y-2">
                 <button
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                   onClick={() => {
                     onEditHandler();
                   }}
@@ -143,6 +142,7 @@ const Map = (props: any) => {
                   Edit zone
                 </button>
                 <button
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                   onClick={() => {
                     onDeleteHandler();
                   }}
