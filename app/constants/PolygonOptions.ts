@@ -1,15 +1,16 @@
 const PolygonOptions = (polygonColor: String) => {
-  return {
+  const Options: Object = {
     fillColor: polygonColor,
     fillOpacity: 0.5,
     strokeColor: "red",
     strokeOpacity: 1,
     strokeWeight: 2,
-    clickable: false,
+    clickable: true,
     draggable: false,
     editable: false,
     geodesic: false,
     zIndex: 1,
   };
+  return Options;
 };
 export default PolygonOptions;
