@@ -1,13 +1,14 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import MapComponent from "../app/components/map/MapComponent";
-const Home: NextPage = () => {
+import LoginComponent from "../app/components/login/LoginComponent";
+
+const Login: NextPage = () => {
   return (
     <div>
-      <MapComponent />
+      <LoginComponent />
     </div>
   );
 };
 
-export default Home;
+export default Login;
