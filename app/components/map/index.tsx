@@ -9,7 +9,6 @@ import toast, { Toaster } from "react-hot-toast";
 import AddModal from "./modals/AddModal";
 import DeleteModal from "./modals/DeleteModal";
 import EditModal from "./modals/EditModal";
-
 const MapComponent = () => {
   const [markers, setMarkers] = useState<Array<types.PathObject>>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState<Boolean>(false);
@@ -30,7 +29,7 @@ const MapComponent = () => {
 
   const router = useRouter();
   const { addZone, deleteZone, editZone } = useApi();
-  const { token } = useStore();
+  const { token, zones } = useStore();
   const { logout } = useLogin();
 
   useEffect(() => {
@@ -126,12 +125,13 @@ const MapComponent = () => {
   const cancel = () => {
     setMarkers([]);
   };
+
   return (
     <div className="bg-white text-black">
-      <div className="flex flex-row space-x-4 mb-1">
+      <div className="flex flex-row space-x-4 my-1">
         <div className="ml-auto ">
           <button
-            className="flex px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+            className="flex px-8 py-2 text-lg font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
             onClick={() => logout()}
           >
             logout
@@ -141,7 +141,7 @@ const MapComponent = () => {
         {markers.length > 0 && (
           <div>
             <button
-              className="flex mr-auto px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+              className="flex px-8 py-2 text-lg font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
               onClick={() => cancel()}
             >
               cancel
