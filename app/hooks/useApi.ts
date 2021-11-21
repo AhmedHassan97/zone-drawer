@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import * as types from "../types/Types";
 import axios from "axios";
 import { useStore } from "../store";
@@ -6,16 +5,29 @@ import { useStore } from "../store";
 const url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const DeleteZone = async (zoneId: String, token: String) => {
-  const result = await axios.delete(
-    `${url}/zones/${zoneId}`,
+  try {
+    for (let index = 0; index < 2; index++) {
+      try {
+        const result = await axios.delete(
+          `${url}/zones/${zoneId}`,
 
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (result) {
+          return result;
+        }
+      } catch (error: any) {
+        console.log(error.message);
+      }
     }
-  );
-  return result;
+  } catch (error) {
+    console.log(error);
+  }
 };
 const AddZone = async (
   label: String,
@@ -23,37 +35,73 @@ const AddZone = async (
   points: Array<types.PathObject>,
   token: String
 ) => {
-  const result = await axios.post(
-    `${url}/zones`,
-    {
-      label: label,
-      color: color,
-      points: points,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  try {
+    for (let index = 0; index < 2; index++) {
+      try {
+        const result = await axios.post(
+          `${url}/zones`,
+          {
+            label: label,
+            color: color,
+            points: points,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        if (result) {
+          return result;
+        }
+      } catch (error: any) {
+        console.log(error.message);
+      }
     }
-  );
-  return result;
+  } catch (error) {
+    console.log(error);
+  }
 };
 const UpdateZone = async (token: String, zoneId: String, newObj: Object) => {
-  const result = await axios.put(`${url}/zones/${zoneId}`, newObj, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return result;
+  try {
+    for (let index = 0; index < 2; index++) {
+      try {
+        const result = await axios.put(`${url}/zones/${zoneId}`, newObj, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (result) {
+          return result;
+        }
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const GetZones = async (token: String) => {
-  const result = await axios.get(`${url}/zones`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return result;
+  try {
+    for (let index = 0; index < 2; index++) {
+      try {
+        const result = await axios.get(`${url}/zones`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (result) {
+          return result;
+        }
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const useApi = () => {
@@ -62,7 +110,7 @@ const useApi = () => {
     const newZones: Array<types.ExportedZone> = [];
     GetZones(token)
       .then((result) => {
-        result.data.data.map((zone: types.ExportedZone) => {
+        result?.data.data.map((zone: types.ExportedZone) => {
           const newZone = {
             label: zone.label,
             color: zone.color,
@@ -83,6 +131,9 @@ const useApi = () => {
       })
       .then(() => {
         addZones(newZones);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   const addZone = async (ZoneObject: types.Zone, token: String) => {
@@ -111,14 +162,20 @@ const useApi = () => {
       .then((result) => {
         console.log(result);
       })
-      .then(() => getZones(token));
+      .then(() => getZones(token))
+      .catch((err) => {
+        console.log("ahmed", err.message);
+      });
   };
   const editZone = (zoneId: String, token: String, newZone: Object) => {
     UpdateZone(token, zoneId, newZone)
       .then((result) => {
         console.log(result);
       })
-      .then(() => getZones(token));
+      .then(() => getZones(token))
+      .catch((err) => {
+        // console.log(err);
+      });
   };
   return { getZones, addZone, deleteZone, editZone };
 };
