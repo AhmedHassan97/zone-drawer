@@ -33,19 +33,13 @@ const LoginComponent: FC = () => {
   };
 
   return (
-    <div className="bg-base-100 flex flex-col justify-center items-center min-h-screen">
-      <Image
-        className="text-base-content"
-        src="/Halan-Egypt.png"
-        alt="logo"
-        width={750}
-        height={300}
-      />
+    <div className="bg-white flex flex-col justify-center items-center min-h-screen">
+      <Image src="/Halan-Egypt.png" alt="logo" width={750} height={300} />
       <div className=" flex flex-col justify-center items-center">
         <div>
           <input
             type="text"
-            className={`p-2 text-primary border-base-content border-2 rounded-md text-xl mb-4`}
+            className={`p-2 text-black border-base-content border-2 rounded-md text-xl mb-4`}
             aria-label="username"
             placeholder="Username"
             {...register("username", {
@@ -61,7 +55,7 @@ const LoginComponent: FC = () => {
         <div>
           <input
             type="password"
-            className={`p-2 text-primary border-base-content border-2 rounded-md text-xl mb-4`}
+            className={`p-2 text-black border-base-content border-2 rounded-md text-xl mb-4`}
             id="password"
             aria-label="password"
             placeholder="Password"
@@ -77,7 +71,7 @@ const LoginComponent: FC = () => {
         </div>
         <div className="flex flex-col">
           <button
-            className={`bg-primary text-primary-content p-4 px-8 hover:bg-primary-focus rounded-box`}
+            className={`bg-blue-500 text-black-content p-4 px-8 hover:bg-primary-focus rounded-box`}
             type="submit"
             aria-label="submitbutton"
             onClick={handleSubmit(onSubmit)}
