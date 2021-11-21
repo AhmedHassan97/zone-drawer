@@ -23,7 +23,7 @@ yarn dev
 #### with npm
 
 ```bash
-cd frontend
+cd zone-drawer
 npm i
 npm run
 ```
