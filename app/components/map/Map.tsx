@@ -17,7 +17,7 @@ import { getCenter } from "../../utils/myUtils";
 
 const containerStyle = {
   width: "100vw",
-  height: "95vh",
+  height: "93vh",
 };
 
 const center = {
@@ -149,7 +149,7 @@ const Map = (props: any) => {
                     onDeleteHandler();
                   }}
                 >
-                  Remove
+                  Delete Zone
                 </button>
               </div>
             </InfoWindow>
