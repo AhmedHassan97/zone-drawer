@@ -164,14 +164,12 @@ const useApi = () => {
       })
       .then(() => getZones(token))
       .catch((err) => {
-        console.log("ahmed", err.message);
+        console.log(err.message);
       });
   };
   const editZone = (zoneId: String, token: String, newZone: Object) => {
     UpdateZone(token, zoneId, newZone)
-      .then((result) => {
-        console.log(result);
-      })
+      .then((result) => {})
       .then(() => getZones(token))
       .catch((err) => {
         // console.log(err);

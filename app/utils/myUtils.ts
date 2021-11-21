@@ -5,7 +5,6 @@ export const changeObjectPropertyNames = (zone: types.Zone) => {
   zone.points.map((point: types.PathObject) => {
     newPath.push({ x: Number(point.lat), y: Number(point.lng) });
   });
-  console.log(newPath);
   return newPath;
 };
 export const getCenter = (points: Array<types.PathObject>) => {

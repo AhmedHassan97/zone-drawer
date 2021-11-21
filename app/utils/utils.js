@@ -531,8 +531,4 @@ function getMidpoints(edges) {
   return midpoints;
 }
 
-function log(obj) {
-  console.log(JSON.stringify(obj));
-}
-
 export default intersect;
