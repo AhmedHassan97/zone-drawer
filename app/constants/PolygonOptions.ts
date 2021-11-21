@@ -7,7 +7,7 @@ const PolygonOptions = (polygonColor: String) => {
     strokeWeight: 2,
     clickable: true,
     draggable: false,
-    editable: false,
+    editable: true,
     geodesic: false,
     zIndex: 1,
   };

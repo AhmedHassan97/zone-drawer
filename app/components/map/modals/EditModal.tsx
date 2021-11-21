@@ -11,7 +11,7 @@ const EditModal = (props: any) => {
       isModalOpen={props.isEditModalOpen}
       closeModal={props.closeEditModal}
     >
-      <div className="mt-2 flex flex-col">
+      <div className="mt-2 flex flex-col text-black">
         <div className="flex flex-row p-2">
           <label className="space-x-8">Region Name</label>
           <div className="flex flex-col ml-auto w-3/4">

@@ -6,7 +6,7 @@ const Modal = (props: any) => {
     <Transition appear show={props.isModalOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-10 overflow-y-auto"
+        className="fixed inset-0 z-10 overflow-y-auto text-black"
         onClose={props.closeModal}
       >
         <div className="min-h-screen px-4 text-center">

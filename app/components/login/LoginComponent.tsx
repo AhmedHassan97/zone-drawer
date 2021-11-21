@@ -71,7 +71,7 @@ const LoginComponent: FC = () => {
         </div>
         <div className="flex flex-col">
           <button
-            className={`bg-blue-500 text-black-content p-4 px-8 hover:bg-primary-focus rounded-box`}
+            className={`bg-blue-500 text-black-content p-4 px-8 hover:bg-blue-200 -focus rounded-box`}
             type="submit"
             aria-label="submitbutton"
             onClick={handleSubmit(onSubmit)}
