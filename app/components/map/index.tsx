@@ -28,7 +28,7 @@ const MapComponent = () => {
     });
 
   const router = useRouter();
-  const { addZone, deleteZone, editZone } = useApi();
+  const { addZone, deleteZone, editZone, getZones } = useApi();
   const { token, zones } = useStore();
   const { logout } = useLogin();
 
@@ -41,6 +41,10 @@ const MapComponent = () => {
       router.push("/");
     }
   }, [isAddModalOpen, token]);
+
+  useEffect(() => {
+    getZones(token);
+  }, []);
 
   const colorHandler = (event: any) => {
     if (currentZone) {
