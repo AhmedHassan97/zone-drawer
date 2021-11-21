@@ -29,7 +29,7 @@ const MapComponent = () => {
     });
 
   const router = useRouter();
-  const { getZones, addZone, deleteZone, editZone } = useApi();
+  const { addZone, deleteZone, editZone } = useApi();
   const { token } = useStore();
   const { logout } = useLogin();
 
@@ -123,15 +123,32 @@ const MapComponent = () => {
     editZone(zoneToBeEditedOrDeleted._id, token, editedZone);
     closeEditModal();
   };
-
+  const cancel = () => {
+    setMarkers([]);
+  };
   return (
-    <div className="max-h-screen">
-      <button
-        className="flex ml-auto px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
-        onClick={() => logout()}
-      >
-        logout
-      </button>
+    <div>
+      <div className="flex flex-row">
+        <div className="ml-auto ">
+          <button
+            className="flex px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+            onClick={() => logout()}
+          >
+            logout
+          </button>
+        </div>
+
+        {markers.length > 0 && (
+          <div>
+            <button
+              className="flex mr-auto px-4 py-2 text-sm font-medium text-red-900 bg-red-100 border border-transparent rounded-md hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500"
+              onClick={() => cancel()}
+            >
+              cancel
+            </button>
+          </div>
+        )}
+      </div>
       <div>
         <Toaster />
       </div>{" "}

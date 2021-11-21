@@ -6,7 +6,7 @@ import {
   Polygon,
   InfoWindow,
 } from "@react-google-maps/api";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import PolygonOptions from "../../constants/PolygonOptions";
 import PolyLineOptions from "../../constants/PolyLineOptions";
 import * as types from "../../types/Types";
@@ -27,7 +27,7 @@ const center = {
 
 const Map = (props: any) => {
   const { zones } = useStore();
-
+  const [label, setLabel] = useState<String>("");
   const markerHandler = (sentMarker: Object, index: Number) => {
     if (index !== 0) {
       const finalMarkers = props.markers.filter(
@@ -67,8 +67,9 @@ const Map = (props: any) => {
 
   const onZoneRightClick = (data: any, zone: types.ExportedZone) => {
     const center = getCenter(zone.points);
-    props.setShowInfoWindow(center);
     props.setZoneToBeEditedOrDeleted(zone);
+    props.setShowInfoWindow(center);
+    setLabel(zone.label);
   };
 
   const onDeleteHandler = () => {
@@ -133,6 +134,7 @@ const Map = (props: any) => {
               position={props.showInfoWindow}
             >
               <div className="flex flex-col space-y-2">
+                <h1>{label}</h1>
                 <button
                   className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
                   onClick={() => {
